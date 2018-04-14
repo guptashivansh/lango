@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>{% block title %}{% endblock %} Django Logins </title>
+        {% include 'snippets/css.html' %}
+    </head>
+    <body>
+        
+    <div class="page-header">
+        <h1><a href="/">Django Login</a></h1>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+    {% include 'snippets/js.html' %}
+</body>
+</html>
