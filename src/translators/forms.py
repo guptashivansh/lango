@@ -23,25 +23,37 @@ class UserLoginForm(forms.Form):
 		return super(UserLoginForm, self).clean(*args, **kwargs)
 
 
-
+LANGUAGE_CHOICES = (
+    ('english','English'),
+    ('hindi','Hindi'),
+    ('french', 'French'),
+    ('spanish', 'Spanish'),
+)
 class UserRegisterForm(forms.ModelForm):
 	password   	= forms.CharField(widget = forms.PasswordInput)
 	password2  	= forms.CharField(widget = forms.PasswordInput, label="Confirm password")
 	full_name  	= forms.CharField(label="Full Name")
 	occupation 	= forms.CharField()
-	language_fluency = forms.CharField()
-	# bio = forms.TextField(max_length=500, null=True)
+	# language_fluency = forms.CharField()
+	cost_per_hour = forms.IntegerField()
+	country 	= forms.CharField(label='Country Of Residence')
 
+	bio = forms.CharField(label='Bio', widget=forms.Textarea, required=False)
 
-
-
+	Languages_Known = forms.MultipleChoiceField(
+        required=False,
+        widget=forms.SelectMultiple,
+        choices=LANGUAGE_CHOICES,
+    )
 	class Meta:
 		model = User
 		fields=[
 			'username',
 			'password',
-			'password2'
-
+			'password2',
+			'full_name',
+			'occupation',
+			'Languages_Known',
 			]
 	def clean_password(self):
 		password=self.cleaned_data.get("password")

@@ -3,16 +3,30 @@ from django.db import models
 
 # Create your models here.
 class TranslatorProfile(models.Model):
-	first_name 		= models.CharField(max_length=50)
-	last_name  		= models.CharField(max_length=50, null=True)
-
+	full_name 		= models.CharField(max_length=50)
+	occupation 		= models.CharField(max_length=50)
+	cost_per_hour 	= models.IntegerField()
+	country 		= models.CharField(max_length=50)
+	#Languages_Known = models.MultipleChoiceField()
+	bio 			= models.TextField(max_length=500, blank=True)
 	timestamp		= models.DateTimeField(auto_now_add=True)
 	updated			= models.DateTimeField(auto_now=True)
 	activated		= models.BooleanField(default=False)
-	bio 			= models.TextField(max_length=500, blank=True)
+
 
 	def __str__(self):
 		return self.user.username
+
+	# def create_slug(instance, new_slug=None):
+	# slug = slugify(instance.full_name)
+	# if new_slug is not None:
+	# 	slug = new_slug
+	# qs = TranslatorProfile.objects.filter(slug=slug).order_by("-timestamp")
+	# exists = qs.exists()
+	# if exists:
+	# 	new_slug = "%s-%s" %(slug, qs.first().timestamp)
+	# 	return create_slug(instance, new_slug = new_slug)
+	# return slug
 
 
 

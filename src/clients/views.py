@@ -24,7 +24,7 @@ def login_view(request):
 		print(request.user.is_authenticated)
 		return redirect("/")
 
-	return render(request,"form.html",{'form':form,'title':title})
+	return render(request,"form_login.html",{'form':form,'title':title})
 
 def register_view(request):
 	title ="Register"
@@ -38,7 +38,7 @@ def register_view(request):
 		login(request,new_user)
 		return redirect("/")
 	context = {"form":form, "title":title}
-	return render(request,"form.html", context)
+	return render(request,"form_register.html", context)
 
 def logout_view(request):
 	logout(request)
