@@ -33,6 +33,9 @@ def register_view(request):
 		user = form.save(commit = False)
 		password = form.cleaned_data.get("password")
 		user.set_password(password)
+		
+		print(obj.full_name)
+
 		user.save()
 		new_user = authenticate(username=user.username,password=password)
 		login(request,new_user)

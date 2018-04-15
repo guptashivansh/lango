@@ -1,21 +1,21 @@
 from django.db import models
+from django.conf import settings
+from django.db.models.signals import pre_save
+
+User= settings.AUTH_USER_MODEL
 
 
 # Create your models here.
 class TranslatorProfile(models.Model):
-	full_name 		= models.CharField(max_length=50)
-	occupation 		= models.CharField(max_length=50)
-	cost_per_hour 	= models.IntegerField()
-	country 		= models.CharField(max_length=50)
-	#Languages_Known = models.MultipleChoiceField()
+	name 			= models.OneToOneField(User, on_delete=models.CASCADE)
+	occupation 		= models.CharField(max_length=50,null=True,blank=True)
+	country 		= models.CharField(max_length=50,null=True,blank=True)
+	cost_per_hour 	= models.IntegerField(default=0)
+	Languages_Known = models.CharField(max_length=50,null=True,blank=True)
 	bio 			= models.TextField(max_length=500, blank=True)
-	timestamp		= models.DateTimeField(auto_now_add=True)
-	updated			= models.DateTimeField(auto_now=True)
-	activated		= models.BooleanField(default=False)
-
-
-	def __str__(self):
-		return self.user.username
+	
+	# def __str__(self):
+	#  	return self.name
 
 	# def create_slug(instance, new_slug=None):
 	# slug = slugify(instance.full_name)
@@ -28,12 +28,9 @@ class TranslatorProfile(models.Model):
 	# 	return create_slug(instance, new_slug = new_slug)
 	# return slug
 
+# def pre_save_receiver(sender, instance, *args, **kwargs):
+# 	print("Saving..")
+# 	print(instance.country)
+# 	instance.save()
 
-
-# full name, 
-# occupation, language fluency (multiple additions are possible), 
-# estimated cost per hour, years of experience, country of residence, brief bio.
-
-
-
-
+# pre_save.connect(pre_save_receiver, sender=TranslatorProfile)
