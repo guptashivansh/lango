@@ -119,8 +119,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
